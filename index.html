@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U-TECH CAD CAM SOLUTIONS | Learn. Master. Get Placed.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #FFB800;
+    --gold-light: #FFD460;
+    --gold-dark: #CC9200;
+    --navy: #0A0E1A;
+    --navy-mid: #111827;
+    --navy-light: #1C2537;
+    --steel: #2A3550;
+    --white: #F5F7FA;
+    --gray: #8A96A8;
+    --accent: #00C8FF;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 70px;
+    background: rgba(10,14,26,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,184,0,0.15);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--navy);
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(255,184,0,0.4);
+  }
+
+  .logo-text { line-height: 1; }
+  .logo-text strong {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+  .logo-text span {
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(255,184,0,0.3);
+  }
+  .nav-cta:hover {
+    background: var(--gold-light);
+    box-shadow: 0 0 30px rgba(255,184,0,0.5);
+    transform: translateY(-1px);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 5% 60px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(255,184,0,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(0,200,255,0.05) 0%, transparent 50%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,184,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,184,0,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(180deg, transparent 0%, black 30%, black 70%, transparent 100%);
+  }
+
+  /* Floating CNC shape */
+  .hero-shape {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+    opacity: 0.12;
+    animation: floatShape 8s ease-in-out infinite;
+  }
+
+  @keyframes floatShape {
+    0%, 100% { transform: translateY(-50%) rotate(0deg); }
+    50% { transform: translateY(-53%) rotate(2deg); }
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,184,0,0.1);
+    border: 1px solid rgba(255,184,0,0.3);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeSlideUp 0.8s ease both;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 8vw, 100px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    animation: fadeSlideUp 0.8s 0.2s ease both;
+  }
+
+  .hero h1 .line-gold { color: var(--gold); }
+  .hero h1 .line-accent { color: var(--accent); }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--gray);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 40px;
+    animation: fadeSlideUp 0.8s 0.4s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeSlideUp 0.8s 0.6s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--navy);
+    padding: 16px 36px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(255,184,0,0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(255,184,0,0.5);
+  }
+
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    padding: 16px 36px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    animation: fadeSlideUp 0.8s 0.8s ease both;
+  }
+
+  .stat { line-height: 1; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-bar {
+    background: var(--gold);
+    padding: 14px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 30px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: var(--navy);
+    letter-spacing: 3px;
+    white-space: nowrap;
+  }
+
+  .marquee-dot { width: 6px; height: 6px; background: var(--navy); border-radius: 50%; opacity: 0.4; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { position: relative; z-index: 1; }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 60px);
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .section-title span { color: var(--gold); }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--gray);
+    max-width: 500px;
+    margin: 16px auto 0;
+    line-height: 1.7;
+  }
+
+  /* ── COURSES ── */
+  #courses {
+    padding: 100px 5%;
+    background: var(--navy-mid);
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .course-card {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 32px;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .course-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .course-card:hover {
+    border-color: rgba(255,184,0,0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .course-card:hover::before { transform: scaleX(1); }
+
+  .course-icon {
+    width: 52px; height: 52px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .course-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+
+  .course-card p {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .course-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 24px;
+  }
+
+  .tag {
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba(255,184,0,0.08);
+    color: var(--gold);
+    border: 1px solid rgba(255,184,0,0.2);
+    text-transform: uppercase;
+  }
+
+  .course-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: gap 0.3s;
+  }
+
+  .course-link:hover { gap: 10px; }
+
+  /* ── FEATURED COURSE ── */
+  #featured {
+    padding: 100px 5%;
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+  }
+
+  .featured-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .featured-left { }
+
+  .featured-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .featured-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .featured-left h2 span { color: var(--gold); }
+
+  .featured-left p {
+    font-size: 16px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .curriculum {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .curr-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--gray);
+  }
+
+  .curr-item::before {
+    content: '✓';
+    color: var(--gold);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .featured-right {
+    position: relative;
+  }
+
+  .feature-card-big {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,184,0,0.15);
+    border-radius: 16px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card-big::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(255,184,0,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .fcb-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .fcb-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .fcb-sub {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 28px;
+  }
+
+  .features-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+
+  .features-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--gray);
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .features-list li:last-child { border-bottom: none; }
+
+  .feat-icon {
+    width: 32px; height: 32px;
+    background: rgba(255,184,0,0.1);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* ── WHY US ── */
+  #why {
+    padding: 100px 5%;
+    background: var(--navy-light);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #why::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(255,184,0,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .why-item {
+    background: var(--navy-light);
+    padding: 40px 32px;
+    transition: background 0.3s;
+    position: relative;
+  }
+
+  .why-item:hover { background: var(--steel); }
+
+  .why-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    color: rgba(255,184,0,0.08);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+
+  .why-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+
+  .why-item h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+
+  .why-item p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+  /* ── TESTIMONIALS ── */
+  #reviews {
+    padding: 100px 5%;
+    background: var(--navy-mid);
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .review-card {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.3s;
+  }
+
+  .review-card:hover {
+    border-color: rgba(255,184,0,0.15);
+    transform: translateY(-4px);
+  }
+
+  .review-stars { color: var(--gold); font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+
+  .review-text {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .reviewer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .reviewer-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--navy);
+    flex-shrink: 0;
+  }
+
+  .reviewer-name { font-weight: 700; font-size: 15px; }
+  .reviewer-role { font-size: 12px; color: var(--gray); }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 100px 5%;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    bottom: 0; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,184,0,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .contact-left h2 span { color: var(--gold); }
+
+  .contact-left p {
+    font-size: 16px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .contact-details { display: flex; flex-direction: column; gap: 20px; }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .contact-item-icon {
+    width: 44px; height: 44px;
+    background: rgba(255,184,0,0.1);
+    border: 1px solid rgba(255,184,0,0.2);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .contact-item-text strong {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .contact-item-text span {
+    font-size: 15px;
+    color: var(--gray);
+  }
+
+  .contact-form-box {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 40px;
+  }
+
+  .form-group { margin-bottom: 20px; }
+
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 14px 16px;
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .form-group select option { background: var(--navy-mid); }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--navy);
+    border: none;
+    padding: 16px;
+    border-radius: 6px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(255,184,0,0.3);
+  }
+
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(255,184,0,0.5);
+  }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    z-index: 999;
+    width: 58px; height: 58px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+    text-decoration: none;
+    transition: all 0.3s;
+    animation: waPulse 2s ease infinite;
+  }
+
+  .wa-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(37,211,102,0.6);
+  }
+
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 8px 30px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 8px 40px rgba(37,211,102,0.7); }
+  }
+
+  .wa-float svg { width: 30px; height: 30px; fill: white; }
+
+  /* ── OFFER BANNER ── */
+  .offer-banner {
+    background: linear-gradient(135deg, #1a1200, #2a1f00);
+    border: 1px solid rgba(255,184,0,0.3);
+    border-radius: 12px;
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0 5% 0;
+    position: relative;
+    z-index: 2;
+    transform: translateY(-28px);
+    flex-wrap: wrap;
+  }
+
+  .offer-text {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .offer-pct {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .offer-desc strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .offer-desc span { font-size: 13px; color: var(--gray); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 40px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-copy { font-size: 13px; color: var(--gray); }
+  .footer-copy span { color: var(--gold); }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--gray);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .featured-inner, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .hero-shape { display: none; }
+    .hero-stats { gap: 24px; }
+    .curriculum { grid-template-columns: 1fr; }
+    .offer-banner { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">UT</div>
+    <div class="logo-text">
+      <strong>U-TECH</strong>
+      <span>CAD CAM Solutions</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#featured">Mastercam</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/919619189618" class="nav-cta">Enroll Now →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Decorative CNC gear SVG -->
+  <svg class="hero-shape" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="250" cy="250" r="200" stroke="#FFB800" stroke-width="1"/>
+    <circle cx="250" cy="250" r="160" stroke="#FFB800" stroke-width="0.5" stroke-dasharray="8 8"/>
+    <circle cx="250" cy="250" r="80" stroke="#FFB800" stroke-width="1"/>
+    <circle cx="250" cy="250" r="20" fill="#FFB800" opacity="0.3"/>
+    <line x1="250" y1="50" x2="250" y2="450" stroke="#FFB800" stroke-width="0.5" stroke-dasharray="4 4"/>
+    <line x1="50" y1="250" x2="450" y2="250" stroke="#FFB800" stroke-width="0.5" stroke-dasharray="4 4"/>
+    <line x1="108" y1="108" x2="392" y2="392" stroke="#FFB800" stroke-width="0.5" stroke-dasharray="4 4"/>
+    <line x1="392" y1="108" x2="108" y2="392" stroke="#FFB800" stroke-width="0.5" stroke-dasharray="4 4"/>
+    <rect x="230" y="40" width="40" height="20" rx="4" fill="#FFB800" opacity="0.5"/>
+    <rect x="230" y="440" width="40" height="20" rx="4" fill="#FFB800" opacity="0.5"/>
+    <rect x="40" y="240" width="20" height="20" rx="4" fill="#FFB800" opacity="0.5"/>
+    <rect x="440" y="240" width="20" height="20" rx="4" fill="#FFB800" opacity="0.5"/>
+    <polygon points="250,130 270,170 250,160 230,170" fill="#FFB800" opacity="0.4"/>
+    <text x="250" y="258" text-anchor="middle" font-family="Bebas Neue" font-size="28" fill="#FFB800" opacity="0.5">CNC</text>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Mumbai's Premier CAD/CAM Institute · Vasai East
+    </div>
+    <h1>
+      Learn.<br>
+      <span class="line-gold">Master.</span><br>
+      <span class="line-accent">Get Placed.</span>
+    </h1>
+    <p class="hero-sub">
+      Industry-leading training in Mastercam, SOLIDWORKS, Siemens NX, AutoCAD & more —
+      with hands-on VMC machining and 100% placement assistance.
+    </p>
+    <div class="hero-actions">
+      <a href="#courses" class="btn-primary">Explore Courses →</a>
+      <a href="https://wa.me/919619189618" class="btn-outline">💬 WhatsApp Us</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Placement Help</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Software Courses</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Tech Support</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER BANNER -->
+<div class="offer-banner">
+  <div class="offer-text">
+    <div class="offer-pct">20%</div>
+    <div class="offer-desc">
+      <strong>Limited Time Offer — This Month Only!</strong>
+      <span>20% discount on ALL courses. Enroll now before seats fill up.</span>
+    </div>
+  </div>
+  <a href="https://wa.me/919619189618" class="btn-primary">Claim Offer →</a>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-dot"></span> MASTERCAM 2026</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> SOLIDWORKS</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> SIEMENS NX</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> AUTOCAD</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> POWERMILL</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> CATIA</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> CARVECO / ARTCAM</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> INVENTOR</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> VMC MACHINING</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> CNC PROGRAMMING</div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><span class="marquee-dot"></span> MASTERCAM 2026</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> SOLIDWORKS</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> SIEMENS NX</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> AUTOCAD</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> POWERMILL</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> CATIA</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> CARVECO / ARTCAM</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> INVENTOR</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> VMC MACHINING</div>
+    <div class="marquee-item"><span class="marquee-dot"></span> CNC PROGRAMMING</div>
+  </div>
+</div>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="section-header">
+    <div class="section-tag">What We Offer</div>
+    <h2 class="section-title">Our <span>Courses</span></h2>
+    <p class="section-sub">Practical, industry-aligned training designed to make you job-ready from day one.</p>
+  </div>
+  <div class="courses-grid">
+
+    <div class="course-card">
+      <div class="course-icon" style="background:rgba(255,184,0,0.12);">⚙️</div>
+      <h3>Mastercam 2026</h3>
+      <p>World's most-used CAD/CAM software. Learn Mill 2D, Mill 3D, Turning, and High-Speed Machining toolpaths.</p>
+      <div class="course-tags">
+        <span class="tag">Mill 2D</span><span class="tag">Mill 3D</span><span class="tag">VMC</span><span class="tag">HSM</span>
+      </div>
+      <a href="#featured" class="course-link">View Details →</a>
+    </div>
+
+    <div class="course-card">
+      <div class="course-icon" style="background:rgba(0,200,255,0.1);">🔷</div>
+      <h3>SOLIDWORKS</h3>
+      <p>Industry-leading 3D CAD for design, simulation, and sheet metal. Get Certified SOLIDWORKS Professional ready.</p>
+      <div class="course-tags">
+        <span class="tag">3D CAD</span><span class="tag">Simulation</span><span class="tag">Sheet Metal</span>
+      </div>
+      <a href="#contact" class="course-link">Enquire Now →</a>
+    </div>
+
+    <div class="course-card">
+      <div class="course-icon" style="background:rgba(100,200,100,0.1);">🟩</div>
+      <h3>Siemens NX</h3>
+      <p>Advanced CAD/CAM used by aerospace and automotive giants. Master NX Modeling and NX CAM machining.</p>
+      <div class="course-tags">
+        <span class="tag">NX CAD</span><span class="tag">NX CAM</span><span class="tag">Advanced</span>
+      </div>
+      <a href="#contact" class="course-link">Enquire Now →</a>
+    </div>
+
+    <div class="course-card">
+      <div class="course-icon" style="background:rgba(255,100,100,0.1);">📐</div>
+      <h3>AutoCAD</h3>
+      <p>Foundation 2D/3D drafting. Essential for all mechanical and civil engineering professionals worldwide.</p>
+      <div class="course-tags">
+        <span class="tag">2D Drafting</span><span class="tag">3D Modeling</span>
+      </div>
+      <a href="#contact" class="course-link">Enquire Now →</a>
+    </div>
+
+    <div class="course-card">
+      <div class="course-icon" style="background:rgba(200,100,255,0.1);">🔵</div>
+      <h3>PowerMill</h3>
+      <p>Delcam's high-performance CAM for complex multi-axis machining. Ideal for mould, die, and aerospace parts.</p>
+      <div class="course-tags">
+        <span class="tag">5-Axis</span><span class="tag">Multi-Axis</span><span class="tag">Mould</span>
+      </div>
+      <a href="#contact" class="course-link">Enquire Now →</a>
+    </div>
+
+    <div class="course-card">
+      <div class="course-icon" style="background:rgba(255,200,0,0.1);">🎨</div>
+      <h3>ArtCAM / Carveco</h3>
+      <p>Creative CNC for jewellery, woodworking, and artistic relief machining. Turn art into precision parts.</p>
+      <div class="course-tags">
+        <span class="tag">Jewellery</span><span class="tag">Relief</span><span class="tag">Artistic CNC</span>
+      </div>
+      <a href="#contact" class="course-link">Enquire Now →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURED COURSE -->
+<section id="featured">
+  <div class="featured-inner">
+    <div class="featured-left">
+      <div class="featured-label">🏆 Flagship Course</div>
+      <h2>Mastercam <span>2026</span> + 3-Axis VMC Operation</h2>
+      <p>Complete, industry-oriented training in CNC programming and real machine operation. Go from zero to job-ready with hands-on VMC experience.</p>
+      <div class="curriculum">
+        <div class="curr-item">CNC & VMC Machine Fundamentals</div>
+        <div class="curr-item">Mastercam 2026 Interface & Workflow</div>
+        <div class="curr-item">2D & 3D Geometry Creation</div>
+        <div class="curr-item">Toolpath Generation (Facing, Pocketing)</div>
+        <div class="curr-item">High-Speed Machining (HSM)</div>
+        <div class="curr-item">Tool Selection, Feeds & Speeds</div>
+        <div class="curr-item">Post Processing for Fanuc</div>
+        <div class="curr-item">G-Code Understanding & Editing</div>
+        <div class="curr-item">Simulation & Verification</div>
+        <div class="curr-item">Real VMC Machine Setup & Operation</div>
+      </div>
+      <a href="https://wa.me/919619189618" class="btn-primary">Enroll via WhatsApp →</a>
+    </div>
+    <div class="featured-right">
+      <div class="feature-card-big">
+        <div class="fcb-badge">✅ 100% Practical Training</div>
+        <div class="fcb-title">Course Highlights</div>
+        <div class="fcb-sub">Everything you need to get placed in the manufacturing industry</div>
+        <ul class="features-list">
+          <li><div class="feat-icon">🏭</div> Hands-on Training on 3-Axis VMC Machines</li>
+          <li><div class="feat-icon">👨‍🏫</div> Expert Trainers with 15+ Years Industry Experience</li>
+          <li><div class="feat-icon">🧰</div> Real-Time Projects & Job Work Exposure</li>
+          <li><div class="feat-icon">🎓</div> U-TECH Certification on Completion</li>
+          <li><div class="feat-icon">💼</div> Interview Preparation & Job Assistance</li>
+          <li><div class="feat-icon">📞</div> Lifetime Technical Support</li>
+          <li><div class="feat-icon">🌐</div> Online & Offline Modes Available</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-header">
+    <div class="section-tag">Why Choose Us</div>
+    <h2 class="section-title">The <span>U-TECH</span> Advantage</h2>
+    <p class="section-sub">We don't just teach software — we build careers in the manufacturing industry.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-num">01</div>
+      <span class="why-icon">🏭</span>
+      <h3>Real Machine Training</h3>
+      <p>Hands-on sessions on actual 3-axis VMC machines, not just simulations. You graduate job-ready.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">02</div>
+      <span class="why-icon">👨‍🏫</span>
+      <h3>Expert Instructors</h3>
+      <p>Learn from professionals with 15+ years of real industry experience in CNC programming and CAD/CAM.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">03</div>
+      <span class="why-icon">💼</span>
+      <h3>100% Placement Support</h3>
+      <p>We actively assist every graduate with resume building, interview prep, and direct company connections.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">04</div>
+      <span class="why-icon">🌐</span>
+      <h3>Flexible Learning</h3>
+      <p>Choose from online or offline training modes. Study at your own pace without compromising quality.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">05</div>
+      <span class="why-icon">📞</span>
+      <h3>Lifetime Support</h3>
+      <p>Even after you complete your course, our instructors are available for lifetime technical guidance.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">06</div>
+      <span class="why-icon">🏆</span>
+      <h3>Industry Certification</h3>
+      <p>Receive a U-TECH certification recognized by manufacturing companies across Maharashtra and beyond.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="section-header">
+    <div class="section-tag">Student Stories</div>
+    <h2 class="section-title">What Our <span>Students</span> Say</h2>
+    <p class="section-sub">Real feedback from engineers who transformed their careers with U-TECH.</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The Mastercam training here is exceptional. The instructor explains everything with real industry examples. Got placed within 2 months of completing the course!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">RK</div>
+        <div>
+          <div class="reviewer-name">Rahul Kulkarni</div>
+          <div class="reviewer-role">CNC Programmer, Pune</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Best institute for SOLIDWORKS in this region. Practical approach to every concept. The placement support is genuine and they really help you find a job."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">PS</div>
+        <div>
+          <div class="reviewer-name">Priya Sharma</div>
+          <div class="reviewer-role">Design Engineer, Mumbai</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"VMC machine training was the highlight. I could operate a real machine before my job interview — that gave me a huge advantage over other candidates."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">AM</div>
+        <div>
+          <div class="reviewer-name">Akash More</div>
+          <div class="reviewer-role">VMC Operator, Nashik</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Online training was smooth and well-organized. Lifetime support is a real promise — I reached out 6 months after completing and got help immediately!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">NP</div>
+        <div>
+          <div class="reviewer-name">Nikhil Patil</div>
+          <div class="reviewer-role">Tooling Engineer, Thane</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"As an ITI student I was worried about the advanced topics, but the teaching style here is very patient and practical. Now I work at a top mould-making company."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">ST</div>
+        <div>
+          <div class="reviewer-name">Saurabh Tawde</div>
+          <div class="reviewer-role">Mould Technician, Vasai</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"U-TECH's CNC programming services helped my workshop take on bigger projects. Great knowledge, great support. Highly recommended for business owners too!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">VD</div>
+        <div>
+          <div class="reviewer-name">Vijay Desai</div>
+          <div class="reviewer-role">Workshop Owner, Virar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-tag">Get In Touch</div>
+      <h2>Start Your <span>Journey</span> Today</h2>
+      <p>Visit us in Vasai East, call us, or drop a WhatsApp message. Our team responds quickly and will guide you to the right course.</p>
+      <div class="contact-details">
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <strong>Address</strong>
+            <span>Office No. 10, 1st Floor, Vrindavan Shopping Centre,<br>Evershine Main Gate, Behind HDFC Bank,<br>Vasai East – 401208, Maharashtra</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-text">
+            <strong>Phone</strong>
+            <span>+91 9309430169 | +91 9619189618</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div class="contact-item-text">
+            <strong>Hours</strong>
+            <span>Monday – Saturday: 11:30 AM – 5:00 PM</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">🌐</div>
+          <div class="contact-item-text">
+            <strong>Website</strong>
+            <span>www.u-tech.in</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-box">
+      <div class="section-tag" style="margin-bottom:16px;">Quick Enquiry</div>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="e.g. Rahul Sharma">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91 XXXXX XXXXX">
+      </div>
+      <div class="form-group">
+        <label>Course Interested In</label>
+        <select>
+          <option value="">Select a course...</option>
+          <option>Mastercam 2026 + VMC Operation</option>
+          <option>SOLIDWORKS</option>
+          <option>Siemens NX (CAD/CAM)</option>
+          <option>AutoCAD</option>
+          <option>PowerMill</option>
+          <option>CATIA</option>
+          <option>ArtCAM / Carveco</option>
+          <option>Inventor</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message (Optional)</label>
+        <textarea placeholder="Any specific questions or requirements..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Send Enquiry via WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">
+    © 2026 <span>U-TECH CAD CAM SOLUTIONS</span>. All Rights Reserved. · Vasai East, Maharashtra
+  </div>
+  <div class="footer-links">
+    <a href="#courses">Courses</a>
+    <a href="#why">Why Us</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="https://wa.me/919619189618">WhatsApp</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/919619189618" class="wa-float" target="_blank" title="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<script>
+function submitForm() {
+  const name = document.querySelector('input[type="text"]').value || 'Student';
+  const phone = document.querySelector('input[type="tel"]').value || 'Not provided';
+  const course = document.querySelector('select').value || 'Not selected';
+  const message = document.querySelector('textarea').value || '';
+  const text = encodeURIComponent(
+    `Hello U-TECH! 👋\n\nI'm interested in enrolling.\n\nName: ${name}\nPhone: ${phone}\nCourse: ${course}${message ? '\nMessage: ' + message : ''}\n\nPlease guide me further.`
+  );
+  window.open(`https://wa.me/919619189618?text=${text}`, '_blank');
+}
+
+// Intersection Observer for fade-in animation
+const cards = document.querySelectorAll('.course-card, .why-item, .review-card');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      entry.target.style.animation = `fadeSlideUp 0.6s ${i * 0.08}s ease both`;
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+cards.forEach(c => {
+  c.style.opacity = '0';
+  observer.observe(c);
+});
+</script>
+
+</body>
+</html>
