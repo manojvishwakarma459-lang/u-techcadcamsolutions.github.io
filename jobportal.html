@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U-TECH Job Portal | Mechanical Engineering Jobs - CNC, VMC, CAD, CAM</title>
+<meta name="description" content="U-TECH CAD CAM SOLUTIONS Job Portal - Mechanical Engineering jobs in CNC Programming, VMC, CAD Design, CAM, Tool Design, Die & Mould. Vasai, Mumbai.">
+<style>
+:root{
+  --purple:#3b2160; --purple-dark:#2b1747; --purple-light:#54357e;
+  --gold:#a5945a; --gold-light:#c9b97e; --cream:#f4f1e8;
+  --ink:#2a2333; --grey:#6b6474; --line:#e5e0ee; --bg:#faf8fc;
+  --green:#2e7d32; --red:#c62828;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{background:var(--bg);color:var(--ink)}
+a{text-decoration:none;color:inherit}
+.container{max-width:1150px;margin:0 auto;padding:0 20px}
+
+/* Header */
+.topbar{background:var(--purple-dark);color:var(--cream);font-size:13px;padding:6px 0}
+.topbar .container{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+header{background:var(--purple);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:10px 0;flex-wrap:wrap;gap:10px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:52px;background:#fff;border-radius:8px;padding:3px}
+.brand h1{font-size:19px;letter-spacing:.5px;line-height:1.1}
+.brand small{color:var(--gold-light);font-size:11px;letter-spacing:1px;display:block;font-weight:400}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap}
+.nav-links button{background:none;border:none;color:#fff;padding:9px 14px;font-size:14px;cursor:pointer;border-radius:6px;transition:.2s}
+.nav-links button:hover{background:var(--purple-light)}
+.nav-links button.active{background:var(--gold);color:var(--purple-dark);font-weight:600}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,var(--purple) 0%,var(--purple-dark) 100%);color:#fff;text-align:center;padding:52px 20px 60px}
+.hero h2{font-size:34px;margin-bottom:10px}
+.hero h2 span{color:var(--gold-light)}
+.hero p{color:#d9d2e6;max-width:640px;margin:0 auto 28px;font-size:16px}
+.searchbox{max-width:700px;margin:0 auto;display:flex;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.searchbox input{flex:1;border:none;padding:15px 18px;font-size:15px;outline:none;color:var(--ink)}
+.searchbox button{background:var(--gold);border:none;padding:0 30px;font-size:15px;font-weight:700;color:var(--purple-dark);cursor:pointer}
+.searchbox button:hover{background:var(--gold-light)}
+.hero-stats{display:flex;justify-content:center;gap:40px;margin-top:34px;flex-wrap:wrap}
+.hero-stats div{text-align:center}
+.hero-stats b{font-size:26px;color:var(--gold-light);display:block}
+.hero-stats span{font-size:13px;color:#cfc6e0}
+
+/* Sections */
+section.page{display:none;padding:40px 0 60px}
+section.page.active{display:block}
+.section-title{font-size:26px;color:var(--purple);margin-bottom:6px}
+.section-sub{color:var(--grey);margin-bottom:26px;font-size:14px}
+
+/* Filters */
+.filters{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;background:#fff;padding:16px;border-radius:10px;border:1px solid var(--line)}
+.filters select,.filters input{padding:10px 12px;border:1px solid var(--line);border-radius:7px;font-size:14px;background:#fff;color:var(--ink);outline:none;min-width:160px}
+.filters select:focus,.filters input:focus{border-color:var(--purple)}
+.filters .grow{flex:1;min-width:200px}
+.btn{display:inline-block;background:var(--purple);color:#fff;border:none;padding:11px 22px;border-radius:7px;font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--purple-light)}
+.btn.gold{background:var(--gold);color:var(--purple-dark)}
+.btn.gold:hover{background:var(--gold-light)}
+.btn.ghost{background:none;border:1.5px solid var(--purple);color:var(--purple)}
+.btn.small{padding:7px 14px;font-size:13px}
+.btn.danger{background:var(--red)}
+
+/* Job cards */
+.job-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+.job-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;transition:.2s;display:flex;flex-direction:column}
+.job-card:hover{box-shadow:0 8px 22px rgba(59,33,96,.15);transform:translateY(-2px);border-color:var(--purple-light)}
+.job-card h3{font-size:17px;color:var(--purple);margin-bottom:4px}
+.job-card .co{font-size:13px;color:var(--grey);margin-bottom:12px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-size:11.5px;background:#f0ebf8;color:var(--purple);padding:4px 10px;border-radius:20px;font-weight:600}
+.tag.gold{background:#f5f0dd;color:#7a6a33}
+.job-meta{font-size:13px;color:var(--grey);line-height:1.9;margin-bottom:14px}
+.job-meta b{color:var(--ink)}
+.job-card .actions{margin-top:auto;display:flex;gap:8px}
+.no-results{text-align:center;color:var(--grey);padding:50px 0;font-size:15px;grid-column:1/-1}
+
+/* Modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(30,18,50,.65);z-index:100;overflow-y:auto;padding:30px 15px}
+.modal-bg.open{display:block}
+.modal{background:#fff;max-width:720px;margin:0 auto;border-radius:14px;overflow:hidden;position:relative}
+.modal-head{background:var(--purple);color:#fff;padding:22px 26px}
+.modal-head h3{font-size:20px;margin-bottom:4px}
+.modal-head p{font-size:13px;color:var(--gold-light)}
+.modal-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer}
+.modal-body{padding:24px 26px}
+.modal-body h4{color:var(--purple);font-size:15px;margin:16px 0 6px}
+.modal-body p,.modal-body li{font-size:14px;color:#453d52;line-height:1.7}
+.modal-body ul{padding-left:20px}
+
+/* Forms */
+.form-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px;max-width:760px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-grid .full{grid-column:1/-1}
+label{font-size:13px;font-weight:600;color:var(--purple);display:block;margin-bottom:5px}
+label .req{color:var(--red)}
+input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:7px;font-size:14px;color:var(--ink);outline:none;background:#fff}
+input:focus,select:focus,textarea:focus{border-color:var(--purple)}
+textarea{resize:vertical;min-height:80px}
+.form-msg{display:none;padding:13px 16px;border-radius:8px;margin-top:16px;font-size:14px;font-weight:600}
+.form-msg.ok{display:block;background:#e6f4e7;color:var(--green)}
+.form-msg.err{display:block;background:#fdeaea;color:var(--red)}
+
+/* Admin */
+.admin-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.admin-tabs button{padding:9px 18px;border:1.5px solid var(--purple);background:#fff;color:var(--purple);border-radius:7px;font-size:13.5px;font-weight:600;cursor:pointer}
+.admin-tabs button.active{background:var(--purple);color:#fff}
+.table-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{background:var(--purple);color:#fff;text-align:left;padding:11px 12px;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:#f8f5fd}
+.empty-note{padding:30px;text-align:center;color:var(--grey);font-size:14px}
+.admin-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+
+/* Categories strip */
+.cat-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:26px 0 8px}
+.cat-chip{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center;font-size:13.5px;font-weight:600;color:var(--purple);cursor:pointer;transition:.2s}
+.cat-chip:hover{border-color:var(--gold);background:#fdfbf3}
+
+/* Footer */
+footer{background:var(--purple-dark);color:#cfc6e0;padding:38px 0 22px;margin-top:20px}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;margin-bottom:24px}
+footer h4{color:var(--gold-light);font-size:15px;margin-bottom:12px}
+footer p,footer li{font-size:13.5px;line-height:2}
+footer ul{list-style:none}
+footer li a:hover{color:#fff}
+.foot-bottom{border-top:1px solid var(--purple-light);padding-top:16px;text-align:center;font-size:12.5px}
+@media(max-width:640px){
+  .form-grid{grid-template-columns:1fr}
+  .hero h2{font-size:26px}
+  .brand h1{font-size:15px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <span>📍 Vasai East, Mumbai, India &nbsp;|&nbsp; ISO 9001:2015 Certified</span>
+    <span><a href="index.html" style="color:inherit">🏠 Main Website</a> &nbsp;|&nbsp; ✉️ utechcadcamsolutions@gmail.com &nbsp;|&nbsp; ✉️ admin@u-tech.in</span>
+  </div>
+</div>
+
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <img src="U-TECH LOGO - PRINT - FINAL.png" alt="U-TECH Logo">
+      <h1>U-TECH JOB PORTAL<small>SHAPING SKILLS · BUILDING FUTURE</small></h1>
+    </div>
+    <nav class="nav-links">
+      <button data-page="home" class="active" onclick="showPage('home',this)">Home</button>
+      <button data-page="jobs" onclick="showPage('jobs',this)">Browse Jobs</button>
+      <button data-page="courses" onclick="showPage('courses',this)">Courses</button>
+      <button data-page="candidate" onclick="showPage('candidate',this)">Candidate Registration</button>
+      <button data-page="employer" onclick="showPage('employer',this)">For Employers</button>
+      <button data-page="admin" onclick="showPage('admin',this)">Admin</button>
+    </nav>
+  </div>
+</header>
+
+<!-- HOME -->
+<section class="page active" id="page-home" style="padding:0">
+  <div class="hero">
+    <h2>Mechanical Engineering Careers,<br><span>Built for the Shop Floor.</span></h2>
+    <p>India's dedicated job portal for CNC, VMC, CAD, CAM, Tool Design &amp; Manufacturing professionals — powered by U-TECH CAD CAM SOLUTIONS.</p>
+    <div class="searchbox">
+      <input type="text" id="heroSearch" placeholder="Search jobs: CNC Programmer, SolidWorks, Tool Design...">
+      <button onclick="heroGo()">Search Jobs</button>
+    </div>
+    <div class="hero-stats">
+      <div><b id="statJobs">0</b><span>Live Jobs</span></div>
+      <div><b>15+</b><span>Industry Domains</span></div>
+      <div><b>10+</b><span>Software Skills</span></div>
+      <div><b id="statCand">0</b><span>Registered Candidates</span></div>
+    </div>
+  </div>
+  <div class="container">
+    <h3 class="section-title" style="margin-top:36px">Browse by Category</h3>
+    <p class="section-sub">Click a category to see matching openings.</p>
+    <div class="cat-strip" id="catStrip"></div>
+    <h3 class="section-title" style="margin-top:36px">Our Training Courses</h3>
+    <p class="section-sub">Learn from industry experts — with placement assistance after every course.</p>
+    <div class="cat-strip" id="courseStrip"></div>
+    <h3 class="section-title" style="margin-top:36px">Latest Openings</h3>
+    <p class="section-sub">Recently posted mechanical engineering jobs.</p>
+    <div class="job-grid" id="homeJobs"></div>
+    <div style="text-align:center;margin-top:26px">
+      <button class="btn gold" onclick="showPage('jobs')">View All Jobs →</button>
+    </div>
+  </div>
+</section>
+
+<!-- JOBS -->
+<section class="page" id="page-jobs">
+  <div class="container">
+    <h2 class="section-title">Browse Jobs</h2>
+    <p class="section-sub">Mechanical engineering openings only — CNC, VMC, CAD, CAM, Tooling, Quality, Production &amp; more.</p>
+    <div class="filters">
+      <input type="text" id="fSearch" class="grow" placeholder="🔍 Search title, skills, company..." oninput="renderJobs()">
+      <select id="fCat" onchange="renderJobs()"><option value="">All Categories</option></select>
+      <select id="fExp" onchange="renderJobs()">
+        <option value="">All Experience</option>
+        <option>Fresher</option><option>1–2 Years</option><option>3–5 Years</option><option>5–10 Years</option><option>Senior Engineer</option>
+      </select>
+      <select id="fLoc" onchange="renderJobs()"><option value="">All Locations</option></select>
+      <button class="btn ghost small" onclick="clearFilters()">Reset</button>
+    </div>
+    <div class="job-grid" id="jobGrid"></div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="page" id="page-courses">
+  <div class="container">
+    <h2 class="section-title">CAD / CAM / CNC Training Courses</h2>
+    <p class="section-sub">ISO 9001:2015 certified institute · Industry-expert faculty · Practical machine training · 100% placement assistance after course completion.</p>
+    <div class="job-grid" id="courseGrid"></div>
+
+    <h2 class="section-title" style="margin-top:44px">Course Enquiry / Admission</h2>
+    <p class="section-sub">Fill the form and our counsellor will call you with batch timings and fees.</p>
+    <div class="form-card">
+      <form id="enqForm" onsubmit="return saveEnquiry(event)">
+        <div class="form-grid">
+          <div><label>Full Name <span class="req">*</span></label><input type="text" name="name" required></div>
+          <div><label>Mobile Number <span class="req">*</span></label><input type="tel" name="phone" pattern="[0-9+ ]{10,15}" required></div>
+          <div><label>Email</label><input type="email" name="email"></div>
+          <div><label>Course Interested In <span class="req">*</span></label>
+            <select name="course" id="enqCourse" required><option value="">Select course...</option></select>
+          </div>
+          <div><label>Education</label>
+            <select name="education">
+              <option>ITI</option><option>Diploma (Mechanical)</option><option>BE/B.Tech (Mechanical)</option><option>12th / Other</option>
+            </select>
+          </div>
+          <div><label>Preferred Batch</label>
+            <select name="batch">
+              <option>Morning</option><option>Afternoon</option><option>Evening</option><option>Weekend</option>
+            </select>
+          </div>
+          <div class="full"><label>Message / Questions</label><textarea name="message" placeholder="Any questions about fees, duration, placement..."></textarea></div>
+        </div>
+        <div style="margin-top:20px"><button class="btn gold" type="submit">Submit Enquiry</button></div>
+        <div class="form-msg" id="enqMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- MASTERCAM DETAIL -->
+<section class="page" id="page-mastercam">
+  <div class="container">
+    <button class="btn ghost small" onclick="showPage('courses')" style="margin-bottom:18px">← Back to All Courses</button>
+    <h2 class="section-title">⚙️ Mastercam — Complete CNC/VMC Programming Course</h2>
+    <p class="section-sub">World's most-used CAM software · 2–3 Months · Beginner to Advanced · ISO certified institute, Vasai East</p>
+    <div class="tags" style="margin-bottom:22px">
+      <span class="tag">2D & 3D Milling</span><span class="tag">CNC Lathe</span><span class="tag">Fanuc Post</span><span class="tag gold">Placement Assistance</span><span class="tag gold">Live Machine Practice</span>
+    </div>
+    <div class="job-grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">
+      <div class="job-card"><h3>Module 1 — Mastercam CAD Basics</h3><div class="job-meta">✔ Wireframe geometry creation & editing<br>✔ 2D sketching, trimming, transform tools<br>✔ Solid & surface model import (STEP/IGES/X_T)<br>✔ Levels, views and work planes (WCS)</div></div>
+      <div class="job-card"><h3>Module 2 — 2D Milling</h3><div class="job-meta">✔ Facing, pocketing & contouring<br>✔ Drilling, tapping, boring cycles<br>✔ Dynamic milling (high-speed 2D)<br>✔ Chamfer, slot and circle mill toolpaths</div></div>
+      <div class="job-card"><h3>Module 3 — 3D Milling</h3><div class="job-meta">✔ Roughing: OptiRough, area roughing<br>✔ Finishing: waterline, scallop, raster<br>✔ Rest machining & pencil tracing<br>✔ Surface high-speed toolpaths (HST)</div></div>
+      <div class="job-card"><h3>Module 4 — CNC Lathe (Turning)</h3><div class="job-meta">✔ Facing, rough & finish turning<br>✔ Grooving, threading, parting-off<br>✔ Drilling & boring on lathe<br>✔ Canned cycles (G71/G70/G76)</div></div>
+      <div class="job-card"><h3>Module 5 — Tooling & Parameters</h3><div class="job-meta">✔ Cutting tool selection (inserts, end mills)<br>✔ Feeds, speeds & depth-of-cut calculation<br>✔ Work holding & fixture basics<br>✔ Setup sheets & operation documentation</div></div>
+      <div class="job-card"><h3>Module 6 — Post Processing & Prove-out</h3><div class="job-meta">✔ Post processors (Fanuc/Siemens)<br>✔ G-code & M-code reading and editing<br>✔ Backplot & verify simulation<br>✔ Live machine prove-out practice</div></div>
+    </div>
+    <div class="form-card" style="margin-top:28px;max-width:100%">
+      <div class="form-grid">
+        <div><h4 style="color:var(--purple);margin-bottom:8px">Who Can Join</h4><p style="font-size:14px;line-height:1.9">ITI (Fitter/Turner/Machinist) · Diploma Mechanical · BE/B.Tech Mechanical · Working CNC operators who want to become programmers</p></div>
+        <div><h4 style="color:var(--purple);margin-bottom:8px">Career After Course</h4><p style="font-size:14px;line-height:1.9">CNC Programmer · VMC Programmer · CAM Engineer · CNC Setter-Programmer<br><b>Starting salary: ₹15,000 – ₹25,000/month</b></p></div>
+      </div>
+      <div style="margin-top:18px"><button class="btn gold" onclick="showPage('courses');enquireCourse('Mastercam')">Enquire for Mastercam Batch →</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLIDWORKS DETAIL -->
+<section class="page" id="page-solidworks">
+  <div class="container">
+    <button class="btn ghost small" onclick="showPage('courses')" style="margin-bottom:18px">← Back to All Courses</button>
+    <h2 class="section-title">🧊 SolidWorks — Complete Mechanical Design Course</h2>
+    <p class="section-sub">Industry-standard 3D CAD software · 2 Months · Beginner to Advanced · ISO certified institute, Vasai East</p>
+    <div class="tags" style="margin-bottom:22px">
+      <span class="tag">Part Modelling</span><span class="tag">Assembly</span><span class="tag">Drafting + GD&T</span><span class="tag">Sheet Metal</span><span class="tag gold">Placement Assistance</span><span class="tag gold">Industrial Project</span>
+    </div>
+    <div class="job-grid" style="grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">
+      <div class="job-card"><h3>Module 1 — Sketching & Part Modelling</h3><div class="job-meta">✔ Sketch tools, relations & smart dimensions<br>✔ Extrude, revolve, sweep, loft<br>✔ Fillets, chamfers, shell, rib, patterns<br>✔ Design intent & feature editing</div></div>
+      <div class="job-card"><h3>Module 2 — Assembly Design</h3><div class="job-meta">✔ Bottom-up & top-down assembly<br>✔ Standard & advanced mates<br>✔ Interference & collision detection<br>✔ Exploded views & animation basics</div></div>
+      <div class="job-card"><h3>Module 3 — Drafting & GD&T</h3><div class="job-meta">✔ Manufacturing drawing views & sections<br>✔ Dimensioning per industry standards<br>✔ GD&T symbols, tolerances & fits<br>✔ BOM, balloons & title blocks</div></div>
+      <div class="job-card"><h3>Module 4 — Sheet Metal</h3><div class="job-meta">✔ Base flange, edge flange, hem, jog<br>✔ Bend allowance & K-factor<br>✔ Flat pattern development<br>✔ Sheet metal drawings for fabrication</div></div>
+      <div class="job-card"><h3>Module 5 — Weldments & Surfacing</h3><div class="job-meta">✔ Weldment structural members & cut lists<br>✔ Basic surface modelling tools<br>✔ Configurations & design tables<br>✔ Working with imported geometry</div></div>
+      <div class="job-card"><h3>Module 6 — Industrial Project</h3><div class="job-meta">✔ Complete machine/fixture design project<br>✔ Full drawing package with BOM<br>✔ Interview preparation & portfolio<br>✔ CSWA certification guidance</div></div>
+    </div>
+    <div class="form-card" style="margin-top:28px;max-width:100%">
+      <div class="form-grid">
+        <div><h4 style="color:var(--purple);margin-bottom:8px">Who Can Join</h4><p style="font-size:14px;line-height:1.9">Diploma Mechanical · BE/B.Tech Mechanical · ITI with drafting interest · Working draughtsmen upgrading from AutoCAD</p></div>
+        <div><h4 style="color:var(--purple);margin-bottom:8px">Career After Course</h4><p style="font-size:14px;line-height:1.9">CAD Design Engineer · Mechanical Design Engineer · Product Design Trainee · Draughtsman (3D)<br><b>Starting salary: ₹18,000 – ₹30,000/month</b></p></div>
+      </div>
+      <div style="margin-top:18px"><button class="btn gold" onclick="showPage('courses');enquireCourse('SolidWorks')">Enquire for SolidWorks Batch →</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- CANDIDATE REGISTRATION -->
+<section class="page" id="page-candidate">
+  <div class="container">
+    <h2 class="section-title">Candidate Registration</h2>
+    <p class="section-sub">Register once — we'll match you with suitable openings and contact you when a matching vacancy arrives.</p>
+    <div class="form-card">
+      <form id="candForm" onsubmit="return saveCandidate(event)">
+        <div class="form-grid">
+          <div><label>Full Name <span class="req">*</span></label><input type="text" name="name" required></div>
+          <div><label>Mobile Number <span class="req">*</span></label><input type="tel" name="phone" pattern="[0-9+ ]{10,15}" required></div>
+          <div><label>Email <span class="req">*</span></label><input type="email" name="email" required></div>
+          <div><label>Current Location <span class="req">*</span></label><input type="text" name="location" placeholder="e.g. Vasai East" required></div>
+          <div><label>Experience Level <span class="req">*</span></label>
+            <select name="experience" required>
+              <option value="">Select...</option>
+              <option>Fresher</option><option>1–2 Years</option><option>3–5 Years</option><option>5–10 Years</option><option>Senior Engineer</option>
+            </select>
+          </div>
+          <div><label>Education <span class="req">*</span></label>
+            <select name="education" required>
+              <option value="">Select...</option>
+              <option>ITI</option><option>Diploma (Mechanical)</option><option>BE/B.Tech (Mechanical)</option><option>ME/M.Tech</option><option>Other</option>
+            </select>
+          </div>
+          <div><label>Primary Domain <span class="req">*</span></label>
+            <select name="domain" required id="candDomain"><option value="">Select...</option></select>
+          </div>
+          <div><label>Expected Salary (₹/month)</label><input type="text" name="salary" placeholder="e.g. 25,000"></div>
+          <div class="full"><label>Software Skills</label><input type="text" name="skills" placeholder="e.g. Mastercam, SolidWorks, AutoCAD, Siemens NX..."></div>
+          <div class="full"><label>Experience Summary / Notes</label><textarea name="summary" placeholder="Current company, machines handled, controllers (Fanuc/Siemens), key work..."></textarea></div>
+          <div class="full"><label>Upload CV / Resume (PDF, PNG, JPEG · max 2 MB)</label><input type="file" name="cv" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"></div>
+        </div>
+        <div style="margin-top:20px"><button class="btn gold" type="submit">Register Now</button></div>
+        <div class="form-msg" id="candMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- EMPLOYER -->
+<section class="page" id="page-employer">
+  <div class="container">
+    <h2 class="section-title">Hire with U-TECH</h2>
+    <p class="section-sub">Share your requirement — we screen, shortlist and send you the best-matched mechanical engineering candidates.</p>
+    <div class="form-card">
+      <form id="empForm" onsubmit="return saveRequirement(event)">
+        <div class="form-grid">
+          <div><label>Company Name <span class="req">*</span></label><input type="text" name="company" required></div>
+          <div><label>Contact Person <span class="req">*</span></label><input type="text" name="contact" required></div>
+          <div><label>Mobile Number <span class="req">*</span></label><input type="tel" name="phone" pattern="[0-9+ ]{10,15}" required></div>
+          <div><label>Email <span class="req">*</span></label><input type="email" name="email" required></div>
+          <div><label>Position / Job Title <span class="req">*</span></label><input type="text" name="title" placeholder="e.g. VMC Programmer" required></div>
+          <div><label>Category <span class="req">*</span></label>
+            <select name="category" required id="empCategory"><option value="">Select...</option></select>
+          </div>
+          <div><label>Experience Required</label>
+            <select name="experience">
+              <option>Fresher</option><option>1–2 Years</option><option>3–5 Years</option><option>5–10 Years</option><option>Senior Engineer</option>
+            </select>
+          </div>
+          <div><label>No. of Openings</label><input type="number" name="openings" min="1" value="1"></div>
+          <div><label>Job Location <span class="req">*</span></label><input type="text" name="location" required></div>
+          <div><label>Salary Range (₹/month)</label><input type="text" name="salary" placeholder="e.g. 20,000 – 35,000"></div>
+          <div class="full"><label>Required Skills / Software</label><input type="text" name="skills" placeholder="e.g. Mastercam, Fanuc controller, GD&T..."></div>
+          <div class="full"><label>Job Description / Notes</label><textarea name="description"></textarea></div>
+          <div class="full"><label>Attach JD / Company Document (PDF, PNG, JPEG · max 2 MB)</label><input type="file" name="attachment" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"></div>
+        </div>
+        <div style="margin-top:20px"><button class="btn gold" type="submit">Submit Requirement</button></div>
+        <div class="form-msg" id="empMsg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN -->
+<section class="page" id="page-admin">
+  <div class="container">
+    <h2 class="section-title">Admin Dashboard</h2>
+    <p class="section-sub">Applications, registered candidates and company requirements (stored locally in this browser).</p>
+    <div class="admin-tabs">
+      <button class="active" id="tabA" onclick="adminTab('applications')">Applications (<span id="cntA">0</span>)</button>
+      <button id="tabC" onclick="adminTab('candidates')">Candidates (<span id="cntC">0</span>)</button>
+      <button id="tabR" onclick="adminTab('requirements')">Company Requirements (<span id="cntR">0</span>)</button>
+      <button id="tabE" onclick="adminTab('enquiries')">Course Enquiries (<span id="cntE">0</span>)</button>
+    </div>
+    <div class="table-wrap"><div id="adminTable"></div></div>
+    <div class="admin-actions">
+      <button class="btn small" onclick="exportCSV()">⬇ Export Current Tab (CSV)</button>
+      <button class="btn small danger" onclick="clearData()">🗑 Clear Current Tab Data</button>
+    </div>
+  </div>
+</section>
+
+<!-- JOB MODAL -->
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-head"><h3 id="mTitle"></h3><p id="mMeta"></p></div>
+    <div class="modal-body" id="mBody"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <h4>U-TECH CAD CAM SOLUTIONS</h4>
+        <p>Shaping Skills · Building Future.<br>ISO 9001:2015 Certified Institute.<br>CAD | CAM | CAE | CNC | VMC | Software<br>Sales | Service | Training | Placement</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('jobs');return false">Browse Jobs</a></li>
+          <li><a href="#" onclick="showPage('courses');return false">Training Courses</a></li>
+          <li><a href="#" onclick="showPage('candidate');return false">Candidate Registration</a></li>
+          <li><a href="#" onclick="showPage('employer');return false">Post a Requirement</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>📍 Vasai East, Mumbai, India<br>🌐 www.u-tech.in<br>✉️ utechcadcamsolutions@gmail.com<br>✉️ admin@u-tech.in</p>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 U-TECH CAD CAM SOLUTIONS · Mechanical Engineering Recruitment Portal</div>
+  </div>
+</footer>
+
+<script>
+/* ===== Data ===== */
+const CATEGORIES=["CNC Programming","VMC Programming","CNC Lathe Programming","CAD Design","CAM Programming","Tool Design","Die & Mould","Product Design","Mechanical Design","Manufacturing","Production","Quality","Maintenance","Automation","Robotics"];
+
+const JOBS=[
+ {id:1,title:"CNC Programmer – Mastercam",company:"Precision Engineering Works",cat:"CNC Programming",exp:"1–2 Years",loc:"Vasai East, Mumbai",salary:"₹18,000 – ₹25,000/month",type:"Full-time",edu:"ITI / Diploma (Mechanical)",
+  skills:["Mastercam","Fanuc Controller","Blueprint Reading"],pref:["SolidWorks","GD&T"],
+  desc:"Create and optimize CNC programs using Mastercam for milling components. Select tools, set feeds/speeds, and prove out programs on the machine.",
+  resp:["Develop CNC milling programs in Mastercam from 2D/3D drawings","Tool selection, cutting parameter optimization and cycle-time reduction","First-piece prove-out and inspection coordination","Maintain program documentation and setup sheets"],
+  benefits:["PF & ESIC","Overtime pay","On-the-job Mastercam upskilling"]},
+ {id:2,title:"VMC Programmer & Setter",company:"Shree Auto Components Pvt. Ltd.",cat:"VMC Programming",exp:"3–5 Years",loc:"Palghar, Maharashtra",salary:"₹28,000 – ₹40,000/month",type:"Full-time",edu:"Diploma / BE (Mechanical)",
+  skills:["VMC Programming","Fanuc / Siemens","Fixture Setting","Precision Measurement"],pref:["Mastercam","HyperMill"],
+  desc:"Independent VMC programmer-setter for 3-axis and 4-axis machining of automotive components. Handle setups, prove-outs and production support.",
+  resp:["Program & set 3/4-axis VMCs for batch production","Fixture design input and work-holding optimization","Reduce setup time and rejection rate","Train junior operators"],
+  benefits:["PF & ESIC","Bonus","Canteen facility","Skill-development support"]},
+ {id:3,title:"CNC Lathe Programmer (Turning)",company:"Om Turnomatics",cat:"CNC Lathe Programming",exp:"1–2 Years",loc:"Bhiwandi, Thane",salary:"₹16,000 – ₹22,000/month",type:"Full-time",edu:"ITI (Turner/Machinist) / Diploma",
+  skills:["CNC Turning","Fanuc OiTF","Insert Selection","Micrometer/Vernier"],pref:["Live-tooling experience"],
+  desc:"Program and operate CNC turning centres for precision shafts, bushes and flanges. Fanuc control experience essential.",
+  resp:["Prepare turning programs at machine (Fanuc)","Insert & tooling selection for steel, SS and aluminium","In-process inspection and quality documentation","Achieve daily production targets"],
+  benefits:["PF","Overtime pay","Yearly increment"]},
+ {id:4,title:"CAD Design Engineer – SolidWorks",company:"Innovate Design Solutions",cat:"CAD Design",exp:"1–2 Years",loc:"Andheri, Mumbai",salary:"₹22,000 – ₹32,000/month",type:"Full-time",edu:"BE/B.Tech (Mechanical)",
+  skills:["SolidWorks","AutoCAD","Manufacturing Drawings","GD&T"],pref:["Sheet-metal design","PDM"],
+  desc:"Prepare 3D models and production drawings for industrial equipment. Work with the manufacturing team from concept to release.",
+  resp:["3D part & assembly modelling in SolidWorks","Detailed 2D manufacturing drawings with GD&T","BOM preparation and design revisions","Support shop floor with drawing clarifications"],
+  benefits:["Health insurance","Flexible hours","SolidWorks certification support"]},
+ {id:5,title:"Tool & Die Design Engineer – Siemens NX",company:"Accurate Tools & Moulds",cat:"Tool Design",exp:"5–10 Years",loc:"Vasai, Mumbai",salary:"₹50,000 – ₹75,000/month",type:"Full-time",edu:"BE (Mechanical) / Tool Room Diploma (NTTF/GTTC preferred)",
+  skills:["Siemens NX","Press Tool Design","Die & Mould","Tolerance Stack-up"],pref:["Moldflow basics","Progressive die experience"],
+  desc:"Lead design of press tools and injection moulds in Siemens NX. Own designs from feasibility to tryout for automotive and appliance customers.",
+  resp:["Design progressive/compound press tools and injection moulds","Feasibility studies and strip layout development","Guide tool room during manufacturing and tryout","Mentor junior designers; standardize design library"],
+  benefits:["PF & Gratuity","Performance bonus","Senior role with team leadership"]},
+ {id:6,title:"CAM Programmer – PowerMill / HyperMill",company:"Micron Diemakers",cat:"CAM Programming",exp:"3–5 Years",loc:"Vasai East, Mumbai",salary:"₹35,000 – ₹50,000/month",type:"Full-time",edu:"Diploma / BE (Mechanical)",
+  skills:["PowerMill or HyperMill","3-axis & 3+2 Machining","Mould/Die Machining","Electrode Programming"],pref:["5-axis exposure","WorkNC"],
+  desc:"CAM programming for mould cores, cavities and electrodes. High-speed machining strategies on hardened steels.",
+  resp:["Generate 3-axis/3+2 toolpaths for core-cavity machining","Electrode extraction and programming","Post-processor handling and machine communication","Cycle-time and surface-finish optimization"],
+  benefits:["PF & ESIC","Overtime","5-axis training opportunity"]},
+ {id:7,title:"Quality Engineer – CMM",company:"Global Precision Industries",cat:"Quality",exp:"1–2 Years",loc:"Boisar, Palghar",salary:"₹20,000 – ₹28,000/month",type:"Full-time",edu:"Diploma / BE (Mechanical)",
+  skills:["CMM Operation","GD&T","Measuring Instruments","Inspection Reports"],pref:["PPAP/APQP documentation","MSA basics"],
+  desc:"In-process and final inspection of machined components using CMM and standard instruments. Prepare inspection and PPAP documentation.",
+  resp:["CMM programming & operation for machined parts","First-article and in-process inspection","Calibration record maintenance","Customer complaint analysis support (8D)"],
+  benefits:["PF & ESIC","Bus facility","Quality certification training"]},
+ {id:8,title:"Trainee CNC/VMC Operator (Freshers)",company:"U-TECH Placement Drive – Multiple Companies",cat:"Production",exp:"Fresher",loc:"Vasai / Palghar / Bhiwandi",salary:"₹12,000 – ₹15,000/month + OT",type:"Full-time",edu:"ITI / Diploma (Mechanical) – 2024/2025/2026 pass-outs",
+  skills:["Basic Machining Knowledge","Measuring Instruments","Willingness to work in shifts"],pref:["CNC/VMC training certificate"],
+  desc:"Campus-style placement drive for fresher ITI/Diploma candidates. Get placed as trainee operators with structured growth to programmer roles.",
+  resp:["Operate CNC/VMC machines under supervision","Loading/unloading, in-process checking","Learn programming basics on the job","Follow 5S and safety practices"],
+  benefits:["Job guarantee after training","Free CNC basics refresher by U-TECH","Growth path: Operator → Setter → Programmer"]},
+ {id:9,title:"Maintenance Engineer – CNC Machines",company:"Reliable Machine Tools Services",cat:"Maintenance",exp:"3–5 Years",loc:"Vasai East, Mumbai",salary:"₹30,000 – ₹45,000/month",type:"Full-time",edu:"Diploma / BE (Mechanical/Electrical)",
+  skills:["CNC Machine Maintenance","Fanuc/Siemens Alarms","Hydraulics & Pneumatics","Preventive Maintenance"],pref:["Ballscrew/spindle overhaul","PLC basics"],
+  desc:"Breakdown and preventive maintenance of CNC/VMC machines. Diagnose electrical, mechanical and controller-level faults.",
+  resp:["Attend CNC/VMC breakdowns and root-cause them","Preventive maintenance scheduling & execution","Spares planning and AMC coordination","Reduce machine downtime (MTTR/MTBF tracking)"],
+  benefits:["PF","Travel allowance","OEM training exposure"]}
+];
+
+const COURSES=[
+ {name:"Mastercam",icon:"⚙️",dur:"2–3 Months",level:"Beginner to Advanced",page:"mastercam",
+  points:["2D & 3D Milling toolpaths","CNC Lathe (Turning) programming","Tool selection, feeds & speeds","Post-processing + machine prove-out practice"],
+  career:"CNC / VMC Programmer"},
+ {name:"SolidWorks",icon:"🧊",dur:"2 Months",level:"Beginner to Advanced",page:"solidworks",
+  points:["Part & assembly modelling","2D manufacturing drawings with GD&T","Sheet metal & weldments","Real industrial project work"],
+  career:"CAD Design Engineer"},
+ {name:"PowerMill",icon:"🔩",dur:"2 Months",level:"Intermediate to Advanced",
+  points:["3-axis high-speed machining strategies","Mould & die core-cavity machining","Electrode programming","Toolpath verification & simulation"],
+  career:"CAM Programmer (Die & Mould)"},
+ {name:"Siemens NX",icon:"🛠️",dur:"3 Months",level:"Beginner to Advanced",
+  points:["NX CAD – modelling, assembly, drafting","NX CAM – milling & turning toolpaths","Synchronous modelling","Industry-standard workflows"],
+  career:"Design / CAM Engineer"},
+ {name:"ArtCAM",icon:"🎨",dur:"1.5 Months",level:"Beginner to Advanced",
+  points:["2D vector design & relief creation","3D artistic relief modelling","Engraving & carving toolpaths","Jewellery, furniture & sign-making applications"],
+  career:"ArtCAM Designer / Programmer"},
+ {name:"AutoCAD",icon:"📐",dur:"1 Month",level:"Beginner",
+  points:["2D mechanical drafting","Dimensioning, layers & blocks","Assembly & part drawings","Print/plot standards"],
+  career:"Draughtsman / Design Trainee"},
+ {name:"CNC | VMC Operating & Programming",icon:"🏭",dur:"2 Months",level:"Fresher-friendly",
+  points:["Machine handling – CNC lathe & VMC","Fanuc / Siemens control operation","G-code & M-code programming","Work offset, tool offset & live machine practice"],
+  career:"CNC/VMC Operator → Setter → Programmer"}
+];
+
+/* ===== Storage helpers ===== */
+const store={
+  get(k){try{return JSON.parse(localStorage.getItem(k))||[]}catch(e){return[]}},
+  add(k,v){const a=this.get(k);a.push(v);
+    try{localStorage.setItem(k,JSON.stringify(a))}
+    catch(e){alert("⚠️ Browser storage is full — the attachment could not be saved. Export your data to CSV, clear old entries, or use a smaller file.");throw e}},
+  set(k,a){localStorage.setItem(k,JSON.stringify(a))},
+  clear(k){localStorage.removeItem(k)}
+};
+const K={app:"utech_applications",cand:"utech_candidates",req:"utech_requirements",enq:"utech_enquiries",posted:"utech_posted_jobs"};
+function allJobs(){return JOBS.concat(store.get(K.posted))}
+
+/* ===== Navigation ===== */
+function showPage(p,btn){
+  document.querySelectorAll("section.page").forEach(s=>s.classList.remove("active"));
+  document.getElementById("page-"+p).classList.add("active");
+  document.querySelectorAll(".nav-links button").forEach(b=>b.classList.toggle("active",b.dataset.page===p));
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(p==="admin")renderAdmin();
+  if(p==="jobs")renderJobs();
+}
+function heroGo(){
+  showPage("jobs");
+  document.getElementById("fSearch").value=document.getElementById("heroSearch").value;
+  renderJobs();
+}
+
+/* ===== Job rendering ===== */
+function jobCard(j){
+  return `<div class="job-card">
+    <h3>${j.title}</h3>
+    <div class="co">${j.company}</div>
+    <div class="tags"><span class="tag">${j.cat}</span><span class="tag gold">${j.exp}</span></div>
+    <div class="job-meta">📍 <b>${j.loc}</b><br>💰 ${j.salary}<br>🛠 ${j.skills.slice(0,3).join(" · ")}</div>
+    <div class="actions">
+      <button class="btn small" onclick="openJob(${j.id})">View Details</button>
+      <button class="btn small gold" onclick="openJob(${j.id},true)">Apply Now</button>
+    </div>
+  </div>`;
+}
+function renderJobs(){
+  const q=(document.getElementById("fSearch").value||"").toLowerCase();
+  const c=document.getElementById("fCat").value,e=document.getElementById("fExp").value,l=document.getElementById("fLoc").value;
+  const list=allJobs().filter(j=>{
+    const hay=(j.title+j.company+j.cat+j.skills.join(" ")+j.loc).toLowerCase();
+    return (!q||hay.includes(q))&&(!c||j.cat===c)&&(!e||j.exp===e)&&(!l||j.loc===l);
+  });
+  document.getElementById("jobGrid").innerHTML=list.length?list.map(jobCard).join(""):
+    `<div class="no-results">No jobs match your filters. Try resetting filters — or <a href="#" style="color:var(--purple);font-weight:700" onclick="showPage('candidate');return false">register as a candidate</a> and we'll contact you when a matching job arrives.</div>`;
+}
+function clearFilters(){
+  ["fSearch","fCat","fExp","fLoc"].forEach(id=>document.getElementById(id).value="");
+  renderJobs();
+}
+function filterByCat(c){
+  showPage("jobs");
+  clearFilters();
+  document.getElementById("fCat").value=c;
+  renderJobs();
+}
+
+/* ===== Job modal + apply ===== */
+let currentJob=null;
+function openJob(id,applyFocus){
+  const j=allJobs().find(x=>x.id===id);currentJob=j;
+  document.getElementById("mTitle").textContent=j.title;
+  document.getElementById("mMeta").textContent=`${j.company} · ${j.loc} · ${j.exp} · ${j.type}`;
+  document.getElementById("mBody").innerHTML=`
+    <p>${j.desc}</p>
+    <h4>Key Responsibilities</h4><ul>${j.resp.map(r=>`<li>${r}</li>`).join("")}</ul>
+    <h4>Required Skills</h4><div class="tags">${j.skills.map(s=>`<span class="tag">${s}</span>`).join("")}</div>
+    <h4>Preferred Skills</h4><div class="tags">${j.pref.map(s=>`<span class="tag gold">${s}</span>`).join("")}</div>
+    <h4>Details</h4>
+    <p>💰 <b>${j.salary}</b> &nbsp;·&nbsp; 🎓 ${j.edu} &nbsp;·&nbsp; 📍 ${j.loc}</p>
+    <h4>Benefits</h4><ul>${j.benefits.map(b=>`<li>${b}</li>`).join("")}</ul>
+    <h4 id="applyAnchor">Apply for this Job</h4>
+    <form onsubmit="return submitApplication(event)">
+      <div class="form-grid">
+        <div><label>Full Name <span class="req">*</span></label><input type="text" name="name" required></div>
+        <div><label>Mobile <span class="req">*</span></label><input type="tel" name="phone" pattern="[0-9+ ]{10,15}" required></div>
+        <div><label>Email <span class="req">*</span></label><input type="email" name="email" required></div>
+        <div><label>Experience <span class="req">*</span></label>
+          <select name="experience" required><option value="">Select...</option>
+          <option>Fresher</option><option>1–2 Years</option><option>3–5 Years</option><option>5–10 Years</option><option>Senior Engineer</option></select></div>
+        <div class="full"><label>Software / Key Skills</label><input type="text" name="skills" placeholder="e.g. Mastercam, Fanuc, SolidWorks"></div>
+        <div class="full"><label>Current Company & Notes</label><textarea name="notes"></textarea></div>
+        <div class="full"><label>Upload CV / Resume (PDF, PNG, JPEG · max 2 MB)</label><input type="file" name="cv" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"></div>
+      </div>
+      <div style="margin-top:16px"><button class="btn gold" type="submit">Submit Application</button></div>
+      <div class="form-msg" id="applyMsg"></div>
+    </form>`;
+  document.getElementById("modalBg").classList.add("open");
+  if(applyFocus)setTimeout(()=>document.getElementById("applyAnchor").scrollIntoView({behavior:"smooth"}),150);
+}
+function closeModal(){document.getElementById("modalBg").classList.remove("open")}
+async function submitApplication(e){
+  e.preventDefault();
+  const f=e.target,o=Object.fromEntries(new FormData(f).entries());
+  const m=document.getElementById("applyMsg");
+  delete o.cv;
+  try{const cv=await readAttachment(f.cv.files[0]);if(cv){o.cvName=cv.name;o.cvData=cv.data}}
+  catch(err){m.className="form-msg err";m.textContent="⚠️ "+err;return false}
+  o.job=currentJob.title;o.company=currentJob.company;o.date=new Date().toLocaleString("en-IN");
+  store.add(K.app,o);
+  m.className="form-msg ok";m.textContent="✅ Application submitted! U-TECH will contact you shortly.";
+  f.reset();updateCounts();
+  return false;
+}
+
+/* ===== Courses ===== */
+function courseCard(c){
+  return `<div class="job-card">
+    <h3>${c.icon} ${c.name}</h3>
+    <div class="co">U-TECH CAD CAM SOLUTIONS · Vasai East</div>
+    <div class="tags"><span class="tag">${c.dur}</span><span class="tag gold">${c.level}</span></div>
+    <div class="job-meta">${c.points.map(p=>"✔ "+p).join("<br>")}<br>🎯 <b>Career: ${c.career}</b></div>
+    <div class="actions">
+      ${c.page?`<button class="btn small" onclick="showPage('${c.page}')">Full Syllabus</button>`:""}
+      <button class="btn small gold" onclick="enquireCourse('${c.name.replace(/'/g,"\\'")}')">Enquire Now</button>
+    </div>
+  </div>`;
+}
+function enquireCourse(name){
+  document.getElementById("enqCourse").value=name;
+  document.getElementById("enqForm").scrollIntoView({behavior:"smooth"});
+}
+function saveEnquiry(e){
+  e.preventDefault();
+  const o=Object.fromEntries(new FormData(e.target).entries());
+  o.date=new Date().toLocaleString("en-IN");
+  store.add(K.enq,o);
+  const m=document.getElementById("enqMsg");
+  m.className="form-msg ok";m.textContent="✅ Enquiry submitted! Our counsellor will contact you with batch details and fees.";
+  e.target.reset();updateCounts();
+  return false;
+}
+
+/* ===== Attachments ===== */
+function readAttachment(file){
+  return new Promise((res,rej)=>{
+    if(!file||!file.size)return res(null);
+    if(!["application/pdf","image/png","image/jpeg"].includes(file.type))return rej("Only PDF, PNG or JPEG files are allowed.");
+    if(file.size>2*1024*1024)return rej("File too large — maximum 2 MB.");
+    const r=new FileReader();
+    r.onload=()=>res({name:file.name,data:r.result});
+    r.onerror=()=>rej("Could not read the file. Please try again.");
+    r.readAsDataURL(file);
+  });
+}
+
+/* ===== Candidate & Employer forms ===== */
+async function saveCandidate(e){
+  e.preventDefault();
+  const f=e.target,o=Object.fromEntries(new FormData(f).entries());
+  const m=document.getElementById("candMsg");
+  delete o.cv;
+  try{const cv=await readAttachment(f.cv.files[0]);if(cv){o.cvName=cv.name;o.cvData=cv.data}}
+  catch(err){m.className="form-msg err";m.textContent="⚠️ "+err;return false}
+  o.date=new Date().toLocaleString("en-IN");
+  store.add(K.cand,o);
+  m.className="form-msg ok";m.textContent="✅ Registration successful! Your profile is added to the U-TECH candidate database.";
+  f.reset();updateCounts();
+  return false;
+}
+async function saveRequirement(e){
+  e.preventDefault();
+  const f=e.target,o=Object.fromEntries(new FormData(f).entries());
+  const m=document.getElementById("empMsg");
+  delete o.attachment;
+  try{const at=await readAttachment(f.attachment.files[0]);if(at){o.attName=at.name;o.attData=at.data}}
+  catch(err){m.className="form-msg err";m.textContent="⚠️ "+err;return false}
+  o.date=new Date().toLocaleString("en-IN");
+  store.add(K.req,o);
+  m.className="form-msg ok";m.textContent="✅ Requirement received! U-TECH will share shortlisted candidate profiles soon.";
+  f.reset();updateCounts();
+  return false;
+}
+
+/* ===== Admin ===== */
+let adminView="applications";
+const COLS={
+  applications:[["date","Date"],["name","Name"],["cv","CV"],["phone","Mobile"],["email","Email"],["job","Applied For"],["company","Company"],["experience","Experience"],["skills","Skills"],["notes","Notes"]],
+  candidates:[["date","Date"],["name","Name"],["cv","CV"],["phone","Mobile"],["email","Email"],["location","Location"],["experience","Experience"],["education","Education"],["domain","Domain"],["skills","Skills"],["salary","Expected ₹"],["summary","Summary"]],
+  requirements:[["date","Date"],["company","Company"],["att","Attachment"],["contact","Contact"],["phone","Mobile"],["email","Email"],["title","Position"],["category","Category"],["experience","Experience"],["openings","Openings"],["location","Location"],["salary","Salary"],["skills","Skills"],["description","Description"]],
+  enquiries:[["date","Date"],["name","Name"],["phone","Mobile"],["email","Email"],["course","Course"],["education","Education"],["batch","Preferred Batch"],["message","Message"]]
+};
+const KEYMAP={applications:K.app,candidates:K.cand,requirements:K.req,enquiries:K.enq};
+function adminTab(v){
+  adminView=v;
+  document.getElementById("tabA").classList.toggle("active",v==="applications");
+  document.getElementById("tabC").classList.toggle("active",v==="candidates");
+  document.getElementById("tabR").classList.toggle("active",v==="requirements");
+  document.getElementById("tabE").classList.toggle("active",v==="enquiries");
+  renderAdmin();
+}
+function renderAdmin(){
+  updateCounts();
+  const rows=store.get(KEYMAP[adminView]),cols=COLS[adminView];
+  const el=document.getElementById("adminTable");
+  if(!rows.length){el.innerHTML=`<div class="empty-note">No ${adminView} yet. Entries appear here as soon as forms are submitted.</div>`;return}
+  const isReq=adminView==="requirements";
+  const esc=s=>(s||"").toString().replace(/</g,"&lt;");
+  const cell=(r,k)=>{
+    if(k==="cv")return r.cvData?`<a href="${r.cvData}" download="${esc(r.cvName).replace(/"/g,"")}" style="color:var(--purple);font-weight:700">📎 ${esc(r.cvName||"CV")}</a>`:"—";
+    if(k==="att")return r.attData?`<a href="${r.attData}" download="${esc(r.attName).replace(/"/g,"")}" style="color:var(--purple);font-weight:700">📎 ${esc(r.attName||"File")}</a>`:"—";
+    return esc(r[k])||"—";
+  };
+  el.innerHTML=`<table><thead><tr>${isReq?"<th>Action</th>":""}${cols.map(c=>`<th>${c[1]}</th>`).join("")}</tr></thead>
+  <tbody>${rows.map((r,i)=>`<tr>${isReq?(r.postedId
+      ?`<td><button class="btn small" onclick="unpostRequirement(${i})">✅ Posted · Remove</button></td>`
+      :`<td><button class="btn small gold" onclick="postRequirement(${i})">Post on Job Portal</button></td>`):""}${cols.map(c=>`<td>${cell(r,c[0])}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+}
+function updateCounts(){
+  document.getElementById("cntA").textContent=store.get(K.app).length;
+  document.getElementById("cntC").textContent=store.get(K.cand).length;
+  document.getElementById("cntR").textContent=store.get(K.req).length;
+  document.getElementById("cntE").textContent=store.get(K.enq).length;
+  document.getElementById("statCand").textContent=store.get(K.cand).length;
+}
+function exportCSV(){
+  const rows=store.get(KEYMAP[adminView]),cols=COLS[adminView];
+  if(!rows.length){alert("No data to export.");return}
+  const esc=v=>`"${(v||"").toString().replace(/"/g,'""')}"`;
+  const val=(r,k)=>k==="cv"?(r.cvName||""):k==="att"?(r.attName||""):r[k];
+  const csv=[cols.map(c=>esc(c[1])).join(",")].concat(rows.map(r=>cols.map(c=>esc(val(r,c[0]))).join(","))).join("\n");
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob(["﻿"+csv],{type:"text/csv"}));
+  a.download=`utech_${adminView}_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+function postRequirement(i){
+  const reqs=store.get(K.req),r=reqs[i];if(!r)return;
+  const sal=(r.salary||"").trim();
+  const job={
+    id:Date.now(),
+    title:r.title||"Untitled Position",
+    company:r.company||"Company (via U-TECH)",
+    cat:r.category||"Production",
+    exp:r.experience||"Fresher",
+    loc:r.location||"Mumbai",
+    salary:sal?(sal.includes("₹")?sal:"₹"+sal+"/month"):"As per industry standards",
+    type:"Full-time",
+    edu:"ITI / Diploma / BE (Mechanical)",
+    skills:(r.skills||"").split(/[,;]/).map(s=>s.trim()).filter(Boolean),
+    pref:[],
+    desc:r.description||`Opening for ${r.title||"this position"} at ${r.company||"a U-TECH partner company"}. Contact U-TECH for full details.`,
+    resp:r.openings?[`Openings: ${r.openings}`]:[],
+    benefits:["Placement support by U-TECH CAD CAM Solutions"]
+  };
+  if(!job.skills.length)job.skills=["See job description"];
+  store.add(K.posted,job);
+  r.postedId=job.id;store.set(K.req,reqs);
+  refreshJobUI();renderAdmin();
+  alert(`✅ "${job.title}" is now live on the Jobs page.`);
+}
+function unpostRequirement(i){
+  const reqs=store.get(K.req),r=reqs[i];if(!r||!r.postedId)return;
+  store.set(K.posted,store.get(K.posted).filter(j=>j.id!==r.postedId));
+  delete r.postedId;store.set(K.req,reqs);
+  refreshJobUI();renderAdmin();
+}
+function refreshJobUI(){
+  const fLoc=document.getElementById("fLoc"),cur=fLoc.value;
+  fLoc.innerHTML='<option value="">All Locations</option>';
+  [...new Set(allJobs().map(j=>j.loc))].forEach(l=>fLoc.add(new Option(l,l)));
+  fLoc.value=cur;
+  document.getElementById("homeJobs").innerHTML=allJobs().slice(0,6).map(jobCard).join("");
+  document.getElementById("statJobs").textContent=allJobs().length;
+  renderJobs();
+}
+function clearData(){
+  if(confirm(`Delete ALL ${adminView} data? This cannot be undone.`)){store.clear(KEYMAP[adminView]);renderAdmin()}
+}
+
+/* ===== Init ===== */
+(function init(){
+  // category dropdowns & chips
+  const fCat=document.getElementById("fCat"),cd=document.getElementById("candDomain"),ec=document.getElementById("empCategory");
+  CATEGORIES.forEach(c=>{
+    fCat.add(new Option(c,c));cd.add(new Option(c,c));ec.add(new Option(c,c));
+  });
+  document.getElementById("catStrip").innerHTML=CATEGORIES.slice(0,10).map(c=>`<div class="cat-chip" onclick="filterByCat('${c}')">${c}</div>`).join("");
+  // courses
+  document.getElementById("courseGrid").innerHTML=COURSES.map(courseCard).join("");
+  const enqC=document.getElementById("enqCourse");
+  COURSES.forEach(c=>enqC.add(new Option(c.name,c.name)));
+  document.getElementById("courseStrip").innerHTML=COURSES.map(c=>
+    `<div class="cat-chip" onclick="showPage('courses');enquireCourse('${c.name.replace(/'/g,"\\'")}')">${c.icon} ${c.name}</div>`).join("");
+  // locations
+  const fLoc=document.getElementById("fLoc");
+  [...new Set(allJobs().map(j=>j.loc))].forEach(l=>fLoc.add(new Option(l,l)));
+  // home latest jobs
+  document.getElementById("homeJobs").innerHTML=allJobs().slice(0,6).map(jobCard).join("");
+  document.getElementById("statJobs").textContent=allJobs().length;
+  document.getElementById("heroSearch").addEventListener("keydown",e=>{if(e.key==="Enter")heroGo()});
+  renderJobs();updateCounts();
+})();
+</script>
+</body>
+</html>
