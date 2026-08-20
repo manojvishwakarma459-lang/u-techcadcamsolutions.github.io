@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#12122a">
+<title>Student Progress Tracker — U-TECH CAD CAM SOLUTIONS</title>
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+
+<!-- boot / sign-in -->
+<div class="boot" id="boot">
+  <div class="logo" style="background:linear-gradient(135deg,#c9973a,#f0cc88);display:flex;align-items:center;justify-content:center;font-weight:900;color:#12122a;">UT</div>
+  <div style="text-align:center">
+    <div style="color:#e2b96f;font-size:19px;font-weight:700;">U-TECH CAD CAM SOLUTIONS</div>
+    <div style="font-size:12px;margin-top:4px;">Student Progress &amp; Syllabus Tracker &bull; Vasai, Mumbai</div>
+  </div>
+  <div class="spin" id="bootSpin"></div>
+  <div id="bootMsg" style="max-width:420px;text-align:center;line-height:1.7"></div>
+  <div id="bootBtn"></div>
+</div>
+
+<!-- app shell -->
+<div id="app" style="display:none">
+  <div class="hdr">
+    <div class="hdr-l">
+      <div class="logo">UT</div>
+      <div style="min-width:0">
+        <div class="hdr-t">U-TECH CAD CAM SOLUTIONS</div>
+        <div class="hdr-s" id="hdrSub">Vasai, Mumbai</div>
+      </div>
+    </div>
+    <div class="hdr-r">
+      <div class="who"><b id="meName"></b><span id="meRole"></span></div>
+      <div class="avatar" id="meAv"></div>
+      <button class="btn btn-ghost btn-sm" style="color:#cbd5e1;border-color:rgba(226,185,111,.35)" id="btnOut">Sign out</button>
+    </div>
+  </div>
+  <div id="main"></div>
+</div>
+
+<!-- signature modal -->
+<div class="ov" id="m-sign">
+  <div class="md">
+    <div class="md-h"><b>&#9997; Confirm &amp; Sign</b><button class="x" data-close="m-sign">&times;</button></div>
+    <div class="md-b">
+      <div class="sig-top" id="sg-topic"></div>
+      <div class="declare" id="sg-declare"></div>
+      <div class="pad" id="sg-pad">
+        <canvas id="sg-canvas" width="620" height="190"></canvas>
+        <div class="line"></div>
+        <div class="hint">&#9997; Sign here with your finger</div>
+      </div>
+      <div class="pad-bar"><span id="sg-stamp"></span><button class="btn btn-ghost btn-xs" id="sg-clear">&#8635; Clear</button></div>
+    </div>
+    <div class="md-f">
+      <button class="btn btn-ghost" data-close="m-sign">Cancel</button>
+      <button class="btn btn-green" id="sg-save">&#10003; I understood &mdash; submit signature</button>
+    </div>
+  </div>
+</div>
+
+<!-- signature viewer -->
+<div class="ov" id="m-view">
+  <div class="md">
+    <div class="md-h"><b>&#9997; Signature on record</b><button class="x" data-close="m-view">&times;</button></div>
+    <div class="md-b" id="v-body"></div>
+    <div class="md-f"><button class="btn btn-ghost" data-close="m-view">Close</button></div>
+  </div>
+</div>
+
+<!-- student add / edit -->
+<div class="ov" id="m-student">
+  <div class="md">
+    <div class="md-h"><b id="ms-title">&#128100; Add student</b><button class="x" data-close="m-student">&times;</button></div>
+    <div class="md-b">
+      <input type="hidden" id="st-id">
+      <div class="f2">
+        <div class="f"><label>Full name *</label><input id="st-name" placeholder="e.g. Rahul Sharma"></div>
+        <div class="f"><label>Mobile</label><input id="st-mobile" placeholder="9876543210"></div>
+      </div>
+      <div class="f"><label>Google / Gmail address * <span class="muted" style="font-weight:500">&mdash; he signs in with this</span></label>
+        <input id="st-email" placeholder="student@gmail.com"></div>
+      <div class="f2">
+        <div class="f"><label>Joining date</label><input type="date" id="st-join"></div>
+        <div class="f"><label>Primary course</label><select id="st-course"></select></div>
+      </div>
+      <div class="f"><label>Notes</label><textarea id="st-notes"></textarea></div>
+      <div class="f"><label class="chk-row"><input type="checkbox" id="st-loadsyl" checked> Load that course's syllabus into his tracker</label></div>
+      <div class="f" id="st-activeWrap" style="display:none"><label class="chk-row"><input type="checkbox" id="st-active" checked> Active (uncheck to block sign-in without deleting records)</label></div>
+    </div>
+    <div class="md-f"><button class="btn btn-ghost" data-close="m-student">Cancel</button><button class="btn btn-gold" id="st-save">&#10003; Save</button></div>
+  </div>
+</div>
+
+<!-- enrol -->
+<div class="ov" id="m-enroll">
+  <div class="md">
+    <div class="md-h"><b>&#127979; Add a course</b><button class="x" data-close="m-enroll">&times;</button></div>
+    <div class="md-b">
+      <div class="f"><label>Course *</label><select id="en-course"></select></div>
+      <div class="f2">
+        <div class="f"><label>Start date</label><input type="date" id="en-start"></div>
+        <div class="f"><label>Expected end</label><input type="date" id="en-end"></div>
+      </div>
+      <div class="f"><label>Status</label><select id="en-status"><option>In Progress</option><option>Completed</option><option>On Hold</option></select></div>
+      <div class="f"><label class="chk-row"><input type="checkbox" id="en-loadsyl" checked> Load this course's syllabus</label></div>
+    </div>
+    <div class="md-f"><button class="btn btn-ghost" data-close="m-enroll">Cancel</button><button class="btn btn-gold" id="en-save">&#10003; Add course</button></div>
+  </div>
+</div>
+
+<!-- daily log -->
+<div class="ov" id="m-log">
+  <div class="md">
+    <div class="md-h"><b>&#128336; Daily entry</b><button class="x" data-close="m-log">&times;</button></div>
+    <div class="md-b">
+      <div class="f2">
+        <div class="f"><label>Date *</label><input type="date" id="lg-date"></div>
+        <div class="f"><label>Course *</label><select id="lg-course"></select></div>
+      </div>
+      <div class="f"><label>Topic covered * <span class="muted" style="font-weight:500">&mdash; matching it to the syllabus marks it Taught</span></label>
+        <input id="lg-topic" list="lg-list" placeholder="start typing..."><datalist id="lg-list"></datalist></div>
+      <div class="f"><label>Duration (hours)</label><input type="number" id="lg-dur" min="0.5" max="12" step="0.5" placeholder="2"></div>
+      <div class="f"><label>Notes / observations</label><textarea id="lg-notes"></textarea></div>
+    </div>
+    <div class="md-f"><button class="btn btn-ghost" data-close="m-log">Cancel</button><button class="btn btn-gold" id="lg-save">&#10003; Save entry</button></div>
+  </div>
+</div>
+
+<!-- add topic -->
+<div class="ov" id="m-topic">
+  <div class="md">
+    <div class="md-h"><b>&#128221; Add a topic</b><button class="x" data-close="m-topic">&times;</button></div>
+    <div class="md-b">
+      <div class="f2">
+        <div class="f"><label>Course *</label><select id="tp-course"></select></div>
+        <div class="f"><label>Module / unit</label><input id="tp-module" placeholder="Module 3 - 2D Toolpaths"></div>
+      </div>
+      <div class="f"><label>Topic name *</label><input id="tp-topic"></div>
+      <div class="f"><label>Notes</label><textarea id="tp-notes"></textarea></div>
+      <div class="f"><label class="chk-row"><input type="checkbox" id="tp-tosyl"> Also add it to the course syllabus library</label></div>
+    </div>
+    <div class="md-f"><button class="btn btn-ghost" data-close="m-topic">Cancel</button><button class="btn btn-gold" id="tp-save">&#10003; Add topic</button></div>
+  </div>
+</div>
+
+<!-- syllabus editor -->
+<div class="ov" id="m-syl">
+  <div class="md wide">
+    <div class="md-h"><b>&#128218; Syllabus library</b><button class="x" data-close="m-syl">&times;</button></div>
+    <div class="md-b">
+      <div class="f"><label>Course</label>
+        <div style="display:flex;gap:8px">
+          <select id="sy-course" style="flex:1"></select>
+          <button class="btn btn-ghost btn-sm" id="sy-new">&#43; New course</button>
+        </div>
+      </div>
+      <div id="sy-list"></div>
+      <button class="btn btn-ghost btn-sm" id="sy-addmod">&#43; Add module</button>
+      <div style="margin-top:16px;border-top:1px dashed var(--border);padding-top:14px">
+        <label style="display:block;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:5px">Paste a syllabus (fast import)</label>
+        <div class="hint-box" style="margin-bottom:8px">One item per line. A line is a <b>module heading</b> if it starts with <code>#</code> or ends with <code>:</code> &mdash; everything else is a topic. Bullets and numbering are removed automatically.</div>
+        <textarea id="sy-paste" style="width:100%;min-height:110px;padding:10px;border:1.5px solid var(--border);border-radius:9px;font-family:Consolas,monospace;font-size:12px" placeholder="# Module 1 - Introduction&#10;1. Interface &amp; Toolbars&#10;Module 2 - 2D Toolpaths:&#10;- Contour&#10;- Pocket"></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+          <button class="btn btn-gold btn-sm" id="sy-append">&#43; Append</button>
+          <button class="btn btn-ghost btn-sm" id="sy-replace">&#8635; Replace this course</button>
+        </div>
+      </div>
+    </div>
+    <div class="md-f">
+      <span class="muted" style="font-size:11.5px;flex:1">Editing the library does not change syllabi already loaded into students.</span>
+      <button class="btn btn-ghost" data-close="m-syl">Close</button>
+      <button class="btn btn-gold" id="sy-save">&#10003; Save syllabus</button>
+    </div>
+  </div>
+</div>
+
+<!-- import -->
+<div class="ov" id="m-import">
+  <div class="md">
+    <div class="md-h"><b>&#8679; Import from the offline tracker</b><button class="x" data-close="m-import">&times;</button></div>
+    <div class="md-b">
+      <p class="muted" style="font-size:13px;line-height:1.7;margin-bottom:14px">
+        In the offline tracker press <b>Backup All Data (JSON)</b>, then choose that file here.
+        Students, courses, syllabi, topics and existing signatures are brought across.
+        A student without an email address is skipped &mdash; online, the Gmail address is how he signs in.
+      </p>
+      <div class="f"><label>Backup file (.json)</label><input type="file" id="imp-file" accept=".json"></div>
+      <div class="f"><label class="chk-row"><input type="checkbox" id="imp-replace"> Overwrite syllabi that already exist here</label></div>
+      <div id="imp-out"></div>
+    </div>
+    <div class="md-f"><button class="btn btn-ghost" data-close="m-import">Close</button><button class="btn btn-gold" id="imp-go">&#10003; Import</button></div>
+  </div>
+</div>
+
+<script type="module" src="app.js?v=1"></script>
+</body>
+</html>
